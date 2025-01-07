@@ -1,6 +1,8 @@
 import { execLangFlow } from "@/lib/langflow-snippet";
 import { NextResponse } from "next/server";
 
+export const maxDuration = 59
+
 export async function POST(request) {
     const input = await request.text();
     console.log({input})
