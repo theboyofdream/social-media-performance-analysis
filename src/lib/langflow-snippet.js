@@ -1,4 +1,5 @@
 "use server"
+export const maxDuration = 59;
 
 class LangflowClient {
     constructor(baseURL, applicationToken) {
@@ -169,4 +170,5 @@ async function main(
 
 export {
     main as execLangFlow
-}
+};
+

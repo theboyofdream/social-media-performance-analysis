@@ -6,6 +6,8 @@ Develop a basic analytics module utilizing Langflow and DataStax to analyze enga
 
 ### Live link
 
+[https://social-media-performance-analysis-chi.vercel.app/](https://social-media-performance-analysis-chi.vercel.app/) Live demo
+
 ## Local set-up/test guide
 
 1. Copy `.env.sample` to new file `.env`
