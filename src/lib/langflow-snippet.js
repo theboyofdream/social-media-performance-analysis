@@ -1,6 +1,3 @@
-"use server"
-export const maxDuration = 59;
-
 class LangflowClient {
     constructor(baseURL, applicationToken) {
         this.baseURL = baseURL;
@@ -114,7 +111,12 @@ class LangflowClient {
     }
 }
 
-async function main(
+const langflowClient = new LangflowClient(
+    "https://api.langflow.astra.datastax.com",
+    process.env.LANGFLOW_APP_TOKEN
+)
+
+export async function execLangFlow(
     inputValue,
     inputType = "chat",
     outputType = "chat",
@@ -122,11 +124,6 @@ async function main(
 ) {
     const flowIdOrName = process.env.FLOW_ID_OR_NAME;
     const langflowId = process.env.LANG_FLOW_ID;
-    const applicationToken = process.env.LANGFLOW_APP_TOKEN
-    const langflowClient = new LangflowClient(
-        "https://api.langflow.astra.datastax.com",
-        applicationToken
-    );
 
     try {
         const tweaks = {
@@ -167,8 +164,4 @@ async function main(
         return `Oops! Something went wrong.`
     }
 }
-
-export {
-    main as execLangFlow
-};
 

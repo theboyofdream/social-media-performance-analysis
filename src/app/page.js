@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
-import { execLangFlow } from "@/lib/langflow-snippet";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { useFormik } from "formik";
 import { Eraser, Send } from "lucide-react";
@@ -23,7 +22,11 @@ export default function Home() {
     onSubmit: async ({ input }, helpers) => {
       helpers.setSubmitting(true);
       setChats((oldChats) => [...oldChats, { user: input }]);
-      const output = await execLangFlow(input, "chat", "chat", false);
+      let output = "Oops! Something went wrong.";
+      const res = await fetch("/api", { method: "POST", redirect: "follow", body: input })
+        if (res.ok) {
+            output = (await res.json())['output'] ?? ""
+        }
       setChats((oldChats) => [...oldChats, { ai: output }]);
       helpers.setSubmitting(false);
       if (output != "Oops! Something went wrong.") {
